@@ -95,6 +95,10 @@ public class HotelSearchFragment extends Fragment  implements DatePickerDialog.O
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(button.getWindowToken(), 0);
+
                 if(validateParameters())
                     loadResultsFragment();
             }

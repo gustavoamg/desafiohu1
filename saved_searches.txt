@@ -1,5 +1,12 @@
 GET /
 
+GET /hotel-urbano/hotel/1
+
+GET /hotel-urbano/hotel/_search
+{
+  "query": {"match_all": {}}
+}
+
 POST /hotel-urbano/hotel/1
 {
   "cidade": "Araruama",
@@ -36,38 +43,140 @@ PUT /hotel-urbano
 
 POST /hotel-urbano/disponibilidade/1
 {
-         "hotel": "1",
-         "data": "1/10/2017",
+         "hotel": {
+  "cidade": "Araruama",
+  "nome": "Mercatto Casa Hotel "
+},
+         "data": "21/10/2017",
          "disponibilidadde": "0",
          "minimo_de_noites" : "1"
 }
 
+POST /hotel-urbano/disponibilidade/1
+        {
+         "hotel":  { "cidade": "Araruama", "nome": "Mercatto Casa Hotel " },
+         "data": "21/01/2001",
+         "disponibilidadde": "1",
+         "minimo_de_noites" : "1"
+        }
+
+GET /hotel-urbano/disponibilidade/1
 
 GET /hotel-urbano/disponibilidade/_search
 {
   "query": {"match_all": {}}
 }
 
-GET /hotel-urbano/disponbilidade/_mapping
+GET /hotel-urbano/_mapping
 
 
 GET /hotel-urbano/hotel/_count
 
 DELETE /hotel-urbano/
 
+PUT /hotel-urbano
+{
+  "mappings": {
+    "disponibilidade": {
+      "properties": {
+        "data": {
+          "type":   "date",
+          "format": "d/MM/yyyy"
+        },
+        "hotel": {
+          "type": "nested"
+      }
+    }
+  }
+}
+}
 
 
 GET /hotel-urbano/hotel/_search
 {
  "query": {
    "match": {
-     "nome": "hotel"
+     "nome": "21/01/2001"
    },
    "filter" : [
-     { "field" : "cidade" }
+     { "nome" : "Mercatto Casa Hotel" }
      ]
  }
  
+}
+
+GET /hotel-urbano/disponibilidade/_search
+{
+ "query": {"match_all": { }}  
+}
+
+GET /hotel-urbano/disponibilidade/_search
+{
+ "query": {
+   "bool": { 
+     "must": [
+       {
+         "match_all": {}
+         
+       },
+       {
+         "nested": {
+           "path": "hotel",
+           "query": {
+             "match": {
+               "hotel.cidade": "Rio"
+             }
+           }
+         }
+       },
+       {
+        "range" : {
+            "data" : {
+                "gte": "09/10/2017",
+
+                "format": "dd/MM/yyyy||dd/MM/yyyy"
+            }
+        }
+       }
+      ]
+    }
+ }
+}
+
+GET /hotel-urbano/disponibilidade/_search
+{
+ "size" : 50,
+ "from": 0, 
+ "query": {
+   "bool": { 
+     "must": [
+       {
+         "match" : {"disponibilidadde": "1"}
+       },
+       {
+         "nested": {
+           "path": "hotel",
+           "query": {
+            "bool" : {
+              "must" : [
+                {"match_phrase": {"hotel.cidade" : "Rio de Janeiro"}}
+              ]
+            }
+           }
+         }
+       },
+       {
+        "range" : {
+            "data" : {
+                "gte": "26/10/2017",
+                "lte": "29/10/2017",
+                "format": "dd/MM/yyyy||dd/MM/yyyy"
+            }
+        }
+       }
+      ]
+    }
+ }
 }
 
 GET /hotel-urbano/_search 
@@ -116,6 +225,10 @@ GET /hotel-urbano/hotel/_search
     "group_by_city": {
       "terms": {
         "field": "cidade.keyword"
+        , "size": 500
+        , "order": {
+          "_term": "asc"
+        }
       }
     }
   }
@@ -125,3 +238,5 @@ GET /hotel-urbano/disponibilidade/_search
 {
   "query": {"match_all": {}} 
 }
+
+
