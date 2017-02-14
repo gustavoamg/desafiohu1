@@ -1,0 +1,10 @@
+dev/DesafioHotelUrbano/*.iml
+dev/DesafioHotelUrbano/.gradle
+dev/DesafioHotelUrbano/local.properties
+dev/DesafioHotelUrbano/.idea/
+dev/DesafioHotelUrbano/.idea/workspace.xml
+dev/DesafioHotelUrbano/.idea/libraries
+dev/DesafioHotelUrbano/.DS_Store
+dev/DesafioHotelUrbano/build
+dev/DesafioHotelUrbano/captures
+dev/DesafioHotelUrbano/.externalNativeBuild
