@@ -17,19 +17,19 @@ done
 
 printf  "\t\t\t[OK]\n"
 
-printf "Inicializando Kibana "
+#printf "Inicializando Kibana "
 
 #inicializa o processo do kibana
-server/kibana-5.2.0-darwin-x86_64/bin/kibana > log/kibana.log 2>&1 &
+#server/kibana-5.2.0-darwin-x86_64/bin/kibana > log/kibana.log 2>&1 &
 
 #verifica status da inicialização
-kibana_initialized=`grep "Status changed from yellow to green - Ready" log/kibana.log | wc -l`
+#kibana_initialized=`grep "Status changed from yellow to green - Ready" log/kibana.log | wc -l`
 
-while [ ! $kibana_initialized -gt 0 ]; do
-        printf "."
-        sleep 5
+#while [ ! $kibana_initialized -gt 0 ]; do
+#        printf "."
+#        sleep 5
 
-        kibana_initialized=`grep "Status changed from yellow to green - Ready" log/kibana.log | wc -l`
-done
+#        kibana_initialized=`grep "Status changed from yellow to green - Ready" log/kibana.log | wc -l`
+#done
 
-printf  "\t\t\t\t[OK]\n"
+#printf  "\t\t\t\t[OK]\n"

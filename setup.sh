@@ -9,11 +9,11 @@ tar -xf elasticsearch-5.2.0.tar
 
 printf "\t\t\t[OK]\n"
 
-printf "Extraindo Kibana"
+#printf "Extraindo Kibana"
 
-tar -xf kibana-5.2.0-darwin-x86_64.tar
+#tar -xf kibana-5.2.0-darwin-x86_64.tar
 
-printf "\t\t\t[OK]\n"
+#printf "\t\t\t[OK]\n"
 
 printf "Configurando Elastic "
 
