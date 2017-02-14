@@ -25,7 +25,7 @@ Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e
 
 * Instruções
 
-1- Execute o comando init.sh;
+1- Execute o comando setup.sh;
 
 2- Instale o apk do aplicativo (desafiohu1/dev/DesafioHotelUrbano/app/build/outputs/apk/app-debug.apk) em um aparelho Android;
 
